@@ -1,58 +1,76 @@
 <template>
   <div class="hello">
-    <h1>{{ msg }}</h1>
-    <p>
-      For a guide and recipes on how to configure / customize this project,<br>
-      check out the
-      <a href="https://cli.vuejs.org" target="_blank" rel="noopener">vue-cli documentation</a>.
-    </p>
-    <h3>Installed CLI Plugins</h3>
-    <ul>
-      <li><a href="https://github.com/vuejs/vue-cli/tree/dev/packages/%40vue/cli-plugin-babel" target="_blank" rel="noopener">babel</a></li>
-      <li><a href="https://github.com/vuejs/vue-cli/tree/dev/packages/%40vue/cli-plugin-eslint" target="_blank" rel="noopener">eslint</a></li>
-    </ul>
-    <h3>Essential Links</h3>
-    <ul>
-      <li><a href="https://vuejs.org" target="_blank" rel="noopener">Core Docs</a></li>
-      <li><a href="https://forum.vuejs.org" target="_blank" rel="noopener">Forum</a></li>
-      <li><a href="https://chat.vuejs.org" target="_blank" rel="noopener">Community Chat</a></li>
-      <li><a href="https://twitter.com/vuejs" target="_blank" rel="noopener">Twitter</a></li>
-      <li><a href="https://news.vuejs.org" target="_blank" rel="noopener">News</a></li>
-    </ul>
-    <h3>Ecosystem</h3>
-    <ul>
-      <li><a href="https://router.vuejs.org" target="_blank" rel="noopener">vue-router</a></li>
-      <li><a href="https://vuex.vuejs.org" target="_blank" rel="noopener">vuex</a></li>
-      <li><a href="https://github.com/vuejs/vue-devtools#vue-devtools" target="_blank" rel="noopener">vue-devtools</a></li>
-      <li><a href="https://vue-loader.vuejs.org" target="_blank" rel="noopener">vue-loader</a></li>
-      <li><a href="https://github.com/vuejs/awesome-vue" target="_blank" rel="noopener">awesome-vue</a></li>
-    </ul>
+    <div id="container" class="container"></div>
   </div>
 </template>
 
 <script>
+import * as Three from 'three'
+
+let scene = null,
+camera=null,
+renderer=null,
+mesh=null
+
 export default {
   name: 'HelloWorld',
   props: {
     msg: String
+  },
+  data(){
+    return{
+
+    }
+  },
+  created(){
+    console.log('第一次',Three.Scene); 
+  },
+  methods:{
+
+    init(){
+      let container = document.getElementById('container');
+      camera = new Three.PerspectiveCamera(70, container.clientWidth/container.clientHeight, 0.01, 10);
+      camera.position.z = 1
+      //创建3D场景对象Scene
+      scene = new Three.Scene();
+      //创建一个长方体几何对象Geometry
+      let geometry = new Three.BoxGeometry(0.2, 0.5, 0.2);
+      // let material = new Three.MeshNormalMaterial();
+      //创建一个材质对象Material
+      const material = new Three.MeshBasicMaterial({
+        color: 0xff0000,//0xff0000设置材质颜色为红色
+      });
+      //两个参数分别为几何体geometry、材质material
+      mesh = new Three.Mesh(geometry, material);
+      //设置网格模型在三维空间中的位置坐标，默认是坐标原点
+      // mesh.position.set(20,10,0);
+      scene.add(mesh);
+
+      renderer = new Three.WebGLRenderer({antialias:true});
+      renderer.setSize(container.clientWidth,container.clientHeight);
+      container.appendChild(renderer.domElement);
+
+    },
+    animate(){
+      requestAnimationFrame(this.animate);
+      console.log(this.animate,'132')
+      mesh.rotation.x += 0.01;
+      mesh.rotation.y += 0.02;
+      renderer.render(scene,camera); 
+    }
+  },
+  mounted(){//页面渲染完毕之后，启用方法
+    this.init()
+    this.animate()
+   
   }
 }
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-h3 {
-  margin: 40px 0 0;
-}
-ul {
-  list-style-type: none;
-  padding: 0;
-}
-li {
-  display: inline-block;
-  margin: 0 10px;
-}
-a {
-  color: #42b983;
+#container{
+    width: 100vw;
+    height: 100vh;
 }
 </style>

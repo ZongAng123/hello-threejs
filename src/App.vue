@@ -1,10 +1,14 @@
 <template>
 <!--  <img alt="Vue logo" src="./assets/logo.png">-->
-  <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <HelloWorld />
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+// import HelloWorld from './components/HelloWorld.vue'
+// import HelloWorld from './components/CreatingScene.vue' //创建场景
+// import HelloWorld from './components/WebGLCompatibility.vue'
+// import HelloWorld from './components/Drawinglines.vue' //画线
+import HelloWorld from './components/Creatingtext.vue' //创建文字
 
 export default {
   name: 'App',

@@ -36,10 +36,11 @@ export default {
       //创建一个长方体几何对象Geometry
       //创建盒子几何体，设置宽、高、深度
       // const geometry = new Three.BoxGeometry();
-      const geometry = new Three.BoxGeometry(0.3, 0.3, 0.3);
+      //BoxGeometry(width : Float, height : Float, depth : Float, widthSegments : Integer, heightSegments : Integer, depthSegments : Integer)
+      const geometry = new Three.BoxGeometry(0.3, 0.3, 0.3,6,6,6);
       //创建一个材质对象Material
       //MeshBasicMaterial不受光照影响
-      const material = new Three.MeshBasicMaterial();
+      const material = new Three.MeshBasicMaterial({color: 0x00ff00});
       //MeshLambertMaterial受光照影响
       // const material = new Three.MeshLambertMaterial();
       //材质半透明设置

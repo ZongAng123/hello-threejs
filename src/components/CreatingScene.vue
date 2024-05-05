@@ -6,7 +6,7 @@
 * 我们需要以下几个对象：场景（scene）、相机（camera）和渲染器（renderer），这样我们就能透过摄像机渲染出场景。
 * */
 import * as THREE from "three";
-import WebGL from 'three/examples/jsm/capabilities/WebGL.js'
+// import WebGL from 'three/examples/jsm/capabilities/WebGL.js'
 export default{
   name: 'CreatingScene',
   props: {
@@ -95,18 +95,17 @@ export default{
         cube.rotation.y += 0.01;
         renderer.render( scene, camera );
       }
+      animate();
 
       //导入WebGL兼容检测模块，并在尝试渲染任何内容之前运行以下程序。
-      if ( WebGL.isWebGLAvailable() ) {
-        // Initiate function or other initializations here
-        animate();
-      } else {
-
-        const warning = WebGL.getWebGLErrorMessage();
-        document.getElementById( 'container' ).appendChild( warning );
-        document.body.appendChild( renderer.domElement );
-
-      }
+      // if ( WebGL.isWebGLAvailable() ) {
+      //   // Initiate function or other initializations here
+      //   animate();
+      // } else {
+      //   const warning = WebGL.getWebGLErrorMessage();
+      //   document.getElementById( 'container' ).appendChild( warning );
+      //   document.body.appendChild( renderer.domElement );
+      // }
 
     },
   }

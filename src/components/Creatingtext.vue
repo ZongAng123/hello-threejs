@@ -276,7 +276,6 @@ function refreshText() {
 }
 
 function createText() {
-
   textGeo = new TextGeometry( text, {
     font: font,
     size: size,
@@ -312,6 +311,7 @@ function onPointerDown( event ) {
   if ( event.isPrimary === false ) return;
   pointerXOnPointerDown = event.clientX - windowHalfX;
   targetRotationOnPointerDown = targetRotation;
+  //为指定元素添加事件句柄。
   document.addEventListener( 'pointermove', onPointerMove );
   document.addEventListener( 'pointerup', onPointerUp );
 
